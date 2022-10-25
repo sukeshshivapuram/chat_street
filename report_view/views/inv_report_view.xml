@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	    <record id="view_inventory_base_report_inherit" model="ir.ui.view">
+	        <field name="name">inventory.base.report.form</field>
+	        <field name="model">inventory.base.report</field>
+	        <field name="inherit_id" ref="odoov13_47sh.view_inventory_base_report"/>
+	        <field name="arch" type="xml">
+	            <form string="Inventory Base Report"  create="false" edit="false">
+	                <sheet>
+	                    <group>
+
+	                   <xpath expr="//field[@name='push_data1']" position="after">
+                        <field name="date"/>
+                        </xpath>
+	                  
+
+	                </group>
+	                </sheet>
+	            </form>
+	        </field>
+    	</record>
+
+    	<record id="view_inventory_base_report_tree_inherit" model="ir.ui.view">
+	        <field name="name">inventory.base.report.tree</field>
+	        <field name="model">inventory.base.report</field>
+	        <field name="inherit_id" ref="odoov13_47sh.view_inventory_base_report_tree"/>
+	        <field name="arch" type="xml">
+	            
+                       <xpath expr="//field[@name='push_data1']" position="after">
+                        <field name="date"/>
+                        </xpath>
+
+	           
+	        </field>
+    	</record>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</odoo>

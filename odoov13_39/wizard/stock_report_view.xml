@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+   
+    <record id="stock_adjustment_view_form" model="ir.ui.view">
+        <field name="name">grn.report.form</field>
+        <field name="model">stock.adjustment.report</field>
+        <field name="arch" type="xml">
+            <form string="GRN Report">
+            <sheet>
+               <group >
+                  <group string="Dates">
+                      <field name="sa_printed" invisible="1"/> 
+                      <field name="date_start" attrs="{'invisible':[('sa_printed','=',True)]}"/>
+                      <field name="date_end" attrs="{'invisible':[('sa_printed','=',True)]}"/>
+                        <field name="file_name" invisible="1"/>
+                        <field name="sa_report" readonly="1" filename="file_name"/>                
+                  </group>  
+
+                  </group>
+                  
+       
+            </sheet>
+            <footer>
+                <button string="Count" type="object" name="generate_report" class="oe_highlight"/>
+                <button string="Cancel" special="cancel" type="object" class="btn btn-secondary oe_inline"/>
+            </footer>
+            </form>
+        </field>
+    </record>
+
+
+
+    <record id="action_for_stock_adjustment" model="ir.actions.act_window">
+        <field name="name">Stock Adjustment Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.adjustment.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="stock_adjustment_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+       <menuitem id="menu_stock_adjustment_action" 
+        action="action_for_stock_adjustment"
+        parent="stock.menu_warehouse_report"/>
+       
+</odoo>

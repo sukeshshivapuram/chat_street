@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="stock_inventory_line_tree2_inherit" model="ir.ui.view">
+            <field name="name">stock.inventory.line.tree2.inherit</field>
+            <field name="model">stock.inventory.line</field>
+            <field name="inherit_id" ref="stock.stock_inventory_line_tree2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='theoretical_qty']" position="before">
+                    <field name="loss_reason"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_picking_type_form_inherit" model="ir.ui.view">
+            <field name="name">Operation Types</field>
+            <field name="model">stock.picking.type</field>
+            <field name="inherit_id" ref="stock.view_picking_type_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/group" position="inside">
+                    <field name="is_rtv"/>
+                </xpath>
+            </field>
+        </record>
+
+
+         <record id="view_picking_form_custom_loss" model="ir.ui.view"> 
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                
+                <xpath expr="//sheet/notebook/page[3]/field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="after">
+                    <field name="loss_reason" invisible='1' />
+                </xpath>
+              
+                
+            </field>
+        </record>
+
+
+
+    <record model="ir.ui.view" id="view_move_line_tree1_inherit">
+       <field name="name">stock.move.line.tree.inherit</field>
+       <field name="model">stock.move.line</field>
+       <field name="type">tree</field>
+       <field name="inherit_id" ref="stock.view_move_line_tree"/>
+       <field name="arch" type="xml">
+               <xpath expr="/tree/field[@name='location_dest_id']" position="after">
+                   <field name="loss_reason" />
+               </xpath>
+       </field>
+    </record>
+    </data>
+</odoo>

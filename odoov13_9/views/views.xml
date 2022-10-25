@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="brand_brand_tree_view" model="ir.ui.view">
+        <field name="name">brand.brand.tree.view</field>
+        <field name="model">brand.brand</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="brand_brand_action" model="ir.actions.act_window">
+        <field name="name">Brand</field>
+        <field name="res_model">brand.brand</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Brands" id="brands_menu" parent="stock.menu_stock_inventory_control" action="brand_brand_action"/>
+
+    <record id="product_template_brand_form_view" model="ir.ui.view">
+        <field name="name">product.template.product.brand.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tracking']" position="after">
+                <field name="brands"/>
+            </xpath>
+             <xpath expr="//page[@name='general_information']" position="after">
+                <page name="brands" string="Brand Management" attrs="{'invisible': [('brands', '=', False)]}">
+                    <field name="uom_cat_id" invisible="True"/>
+                    <field name="product_brand_ids">
+                        <tree string="Brands" editable="bottom">
+                            <field name="brand"/>
+                            <field name="pack_size" domain="[('category_id', '=', parent.uom_cat_id)]"/>
+                            <field name="sku"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_supplierinfo_brand_form_view" model="ir.ui.view">
+        <field name="name">product.supplierinfo.brand.form.view</field>
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
+        <field name="arch" type="xml">
+             <xpath expr="//field[@name='product_tmpl_id']" position="after">
+                <field name="warehouse_id"/>
+                <field name="product_brand_id" domain="[('product_tmpl_id', '=', product_tmpl_id)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_order_brand_form" model="ir.ui.view">
+        <field name="name">purchase.order.brand.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet/notebook/page/field/tree/field[@name='name']" position="after">
+                <field name="product_tmpl_id" invisible="True"/>
+                <field name="product_brand_id" domain="[('id', 'in', parent.product_brand_ids),('product_tmpl_id','=',product_tmpl_id)]"/>
+                <field name='b_name' invisible="True"/>
+            </xpath>
+            <xpath expr="/form/sheet/notebook/page/field[@name='order_line']" position="after">
+                <field name="product_brand_ids" invisible="True"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_order_view_form_brand_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.form.brand.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase_stock.purchase_order_view_form_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='picking_type_id']" position="replace">
+                <field name="del_to" invisible="True"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="picking_type_id" domain="[('code','=','incoming'), '|', ('warehouse_id', '=', False), ('warehouse_id.company_id', '=', company_id)]" options="{'no_create': True}" groups="stock.group_stock_multi_locations"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_production_lot_brand_form" model="ir.ui.view">
+        <field name="name">view.production.lot.brand.form</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="product_brand_id" readonly="True"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_stock_quant_tree_brand_editable" model="ir.ui.view">
+        <field name="name">view.stock.quant.tree.brand.editable</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree_editable"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lot_id']" position="after">
+                <field name="product_brand_id" readonly="True"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

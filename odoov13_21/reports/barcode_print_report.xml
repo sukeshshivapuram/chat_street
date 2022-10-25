@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_argox_barcodelabels" model="report.paperformat">
+            <field name="name">Argox Label Paper Format</field>
+            <field name="default" eval="True" />
+            <field name="format">custom</field>
+            <field name="page_height">40</field>
+            <field name="page_width">60</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">4</field>
+            <field name="margin_bottom">1</field>
+            <field name="margin_left">1</field>
+            <field name="margin_right">1</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">0</field>
+            <field name="dpi">203</field>
+        </record>
+
+        <template id="external_layout_curefit_barcode">
+            <div class="article o_report_layout_standard"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-call="web.address_layout"/>
+                <t t-raw="0"/>
+            </div>
+        </template>
+
+        <!-- wizard -->
+        <report id="curefit_barcode_print_pdf_stock_move"
+            model="stock.move"
+            string="Argox Barcodes (PDF)"
+            name="odoov13_21.curefit_barcode_print_template_stock_move"
+            file="odoov13_21.curefit_barcode_print_template_stock_move"
+            report_type="qweb-pdf"
+            paperformat="odoov13_21.paperformat_argox_barcodelabels"
+        />
+        <template id="curefit_barcode_print_template_stock_move">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="odoov13_21.external_layout_curefit_barcode">
+                        <div class="page" style="font-size:50px;text-align:center;">
+                            <t t-foreach="o.move_line_ids" t-as="move_line">
+                                <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', move_line.lot_id.name, 600, 150)" style="width:100%;height:15rem" alt="Barcode"/>
+                                <span t-esc="move_line.lot_id.name"/>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        
+        <!-- consolidated -->
+        <report id="curefit_barcode_print_pdf_stock_picking"
+            model="stock.picking"
+            string="Argox Barcodes (PDF)"
+            name="odoov13_21.curefit_barcode_print_template_stock_picking"
+            file="odoov13_21.curefit_barcode_print_template_stock_picking"
+            report_type="qweb-pdf"
+            paperformat="odoov13_21.paperformat_argox_barcodelabels"
+        />
+
+        <template id="curefit_barcode_print_template_stock_picking">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="odoov13_21.external_layout_curefit_barcode">
+                        <div class="page" style="font-size:50px;text-align:center;">
+                            <t t-foreach="o.move_line_ids_without_package" t-as="move_line">
+                                <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', move_line.lot_id.name, 600, 150)" style="width:100%;height:15rem" alt="Barcode"/>
+                                <span t-esc="move_line.lot_id.name"/>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+        <!-- line -->
+        <report id="curefit_barcode_print_pdf_stock_move_line"
+            model="stock.move.line"
+            string="Argox Barcodes (PDF)"
+            name="odoov13_21.curefit_barcode_print_template_stock_move_line"
+            file="odoov13_21.curefit_barcode_print_template_stock_move_line"
+            report_type="qweb-pdf"
+            paperformat="odoov13_21.paperformat_argox_barcodelabels"
+        />
+
+        <template id="curefit_barcode_print_template_stock_move_line">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="odoov13_21.external_layout_curefit_barcode">
+                        <div class="page" style="font-size:50px;text-align:center;">
+                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.lot_id.name, 600, 150)" style="width:100%;height:15rem" alt="Barcode"/>
+                            <span t-esc="o.lot_id.name"/>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+        <!-- lot masters -->
+        <report
+            string="Lot/Serial Number (PDF)"
+            id="stock.action_report_lot_label"
+            model="stock.production.lot"
+            report_type="qweb-pdf"
+            name="odoov13_21.report_lot_label_curefit_barcode"
+            file="odoov13_21.report_lot_label_curefit_barcode"
+            print_report_name="'Lot-Serial - %s' % object.name"
+            paperformat="odoov13_21.paperformat_argox_barcodelabels"
+        />
+
+        <template id="report_lot_label_curefit_barcode">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="odoov13_21.external_layout_curefit_barcode">
+                        <div class="page" style="font-size:50px;text-align:center;">
+                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 150)" style="width:100%;height:15rem" alt="Barcode"/>
+                            <span t-esc="o.name"/>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

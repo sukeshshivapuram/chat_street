@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<!-- Form View added by Maulik Barad on Date 26-Sep-2019. -->
+	<record id="inter_company_transfer_ept_pickings_form_view"
+		model="ir.ui.view">
+		<field name="name">inter.company.transfer.ept.pickings.form.view
+		</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="stock.view_picking_form" />
+		<field name="arch" type="xml">
+			<field name="location_dest_id" position="after">
+				<field name="inter_company_transfer_id"
+					attrs="{'invisible':[('inter_company_transfer_id','=',False)]}"
+					readonly="1" />
+			
+				<field name="op_code" invisible="True"/>
+				<field name="z_qty_count"  invisible='1'/>
+				<field name="z_button_inv"  invisible='1'/>
+			</field>
+			
+			<field name="origin" position="after">
+			  <field name="ict_id_no" options="{'no_create': True, 'no_create_edit':True}"  
+			  	attrs="{'invisible':['|','|',('inter_company_transfer_id','=',False),('op_code','=','outgoing'),('op_code','=','internal')],'required': [('op_code','=','incoming'),('inter_company_transfer_id','!=',False)] }"/>
+			  <!-- <field name="icd_no" widget="many2many_tag"></field> -->
+			  </field>
+
+
+
+
+			<header position='inside'>
+				<button string="Get Product Details" type="object" name="fetch_detailed_operation" class="oe_highlight" attrs="{'invisible':['|','|','|','|','|',('inter_company_transfer_id','=',False),('op_code','!=','incoming'),('state','=','draft'),('state','=','done'),('state','=','cancel'),('z_button_inv','=',True)]}"/>
+			</header>
+		</field>
+	</record>
+
+	<!-- Search View added by Maulik Barad on Date 26-Sep-2019. -->
+	<record id="inter_company_transfer_ept_picking_search_view"
+		model="ir.ui.view">
+		<field name="name">inter.company.transfer.ept.picking.search.view
+		</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id"
+			ref="stock.view_picking_internal_search" />
+		<field name="arch" type="xml">
+			<xpath expr="//filter[@name='activities_overdue']"
+				position="before">
+				<field name="inter_company_transfer_id" />
+				<filter string="ICT Pickings"
+					name="inter_company_transfer_id"
+					domain="[('inter_company_transfer_id','!=', False)]" />
+				<separator />
+			</xpath>
+		</field>
+	</record>
+
+
+
+	<!-- <record id="view_stock_move_line_operation_tree_inherit_for_done" model="ir.ui.view">
+            <field name="name">stock.move.line.operations.tree</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_stock_move_line_operation_tree" />
+            <field name="arch" type="xml">
+
+            	<field name='package_id' position=after >
+            		<field name='z_done'/>
+            	</field>
+            </field>
+        </record> -->
+
+
+    <record model="ir.ui.view" id="view_stock_move_line_operation_tree_inherit_for_done">
+      <field name="name">stock.move.line.operations.tree</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_stock_move_line_operation_tree" />
+        <field name="arch" type="xml">
+           <xpath expr="/tree/field[@name='package_id']" position="after">
+               <field name="z_done" invisible='1'/>
+           </xpath>
+   </field>
+   </record>
+
+</odoo>

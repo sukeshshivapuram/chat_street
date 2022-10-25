@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="purchase_tolerance_inventry">
+            <field name="name">purchase tolerance inventry</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>    
+            <field name="arch" type="xml">
+              <xpath expr="//group[@name='operations']" position="inside">  
+              <field name="purchase_tol_reqd"/>
+              <label for="z_purchase_tolerance" attrs="{'invisible':[('purchase_tol_reqd','=',False)]}"/> 
+              <div class="o_row">               
+                    <field name="z_purchase_tolerance" class="oe_inline" style="vertical-align:baseline" attrs="{'invisible':[('purchase_tol_reqd','=',False)]}"/>
+
+              </div>
+              
+              </xpath>
+            </field>                   
+        </record>
+        <!-- <record model="ir.ui.view" id="purchase_tolerance_purchase">
+            <field name="name">purchase tolerance purchase</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>    
+            <field name="arch" type="xml">
+              <xpath expr="//form/group/group/field[@name='product_code']" position="after">
+                <label for="zy_purchase_tolerance"/> 
+                <div class="o_row">                               
+                    <field name="zy_purchase_tolerance" class="oe_inline" style="vertical-align:baseline"/>
+                </div>
+              </xpath>
+            </field>                   
+        </record> -->
+        <record model="ir.ui.view" id="purchase_tolerance_variants">
+            <field name="name">purchase tolerance variants</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>    
+            <field name="arch" type="xml">
+             <xpath expr="//div[hasclass('oe_title')]" position="after">
+                <label for="zx_purchase_tolerance"/> 
+                <div class="o_row"> 
+                    <field name="zx_purchase_tolerance"  class="oe_inline" style="vertical-align:baseline"/>
+                </div>
+             </xpath>
+            </field>                   
+        </record>
+    </data>
+</odoo>     

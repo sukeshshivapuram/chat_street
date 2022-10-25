@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="view_inventory_data_report" model="ir.ui.view">
+	        <field name="name">data.for.reports.form</field>
+	        <field name="model">data.for.reports</field>
+	        <field name="arch" type="xml">
+	            <form string="Inventory Base Report"  create="false" edit="false">
+	                <sheet>
+	                    <group>
+	                    <field name='product_id'/>
+	                    <field name='uom_id'/>
+	                    <field name='category_id'/>
+	                    <field name='product_code'/>
+	                    <field name='warehouse_id'/>
+	                    <!-- <field name='location_id'/> -->
+	                    <!-- <field name='location_dest_id'/> -->
+	                    <field name='product_qty'/>
+	                    <field name='price_unit'/>
+	                    <!-- <field name='transaction_types'/> -->
+	                    <field name='value'/>
+	                    <field name='move_id'/>
+	                    <field name='date'/>
+	                    <field name='data_sent'/>
+	                </group>
+	                </sheet>
+	            </form>
+	        </field>
+    	</record>
+
+    	<record id="view_inventory_data_report_tree" model="ir.ui.view">
+	        <field name="name">data.for.reports.tree</field>
+	        <field name="model">data.for.reports</field>
+	        <field name="arch" type="xml">
+	            <tree string="Inventory Base Report"  create="false" edit="false">
+
+
+	                    <field name='product_id'/>
+	                    <field name='uom_id'/>
+	                    <field name='category_id'/>
+	                    <field name='product_code'/>
+	                    <field name='warehouse_id'/>
+	                    <field name='date'/>
+
+
+	                    <field name='sys_op_qty'/>
+	                    <field name='sys_op_value'/>
+
+	                    <field name='gr_in_qty'/>
+	                    <field name='gr_in_value'/>
+
+	                    <field name='to_in_qty'/>
+	                    <field name='to_in_val'/>
+
+	                    <field name='to_out_qty'/>
+	                    <field name='to_out_val'/>
+
+	                    <field name='grr_out_qty'/>
+	                    <field name='grr_out_val'/>
+
+	                    <field name='intransit_qty'/>
+	                    <field name='intransit_val'/>
+
+	                    <field name='wastage_qty'/>
+	                    <field name='wastage_val'/>
+
+	                    <field name='damaged_qty'/>
+	                    <field name='damaged_val'/>
+
+	                    <field name='inventory_added_qty'/>
+	                    <field name='inventory_added_val'/>
+
+	                    <field name='inventory_closing_qty'/>
+	                    <field name='inventory_closing_val'/>
+
+	                    <field name='inventory_sale_qty'/>
+	                    <field name='inventory_sale_val'/>
+
+	                    <field name='consumed_qty'/>
+	                    <field name='consumed_val'/>
+
+	                    <field name='selling_qty'/>
+	                    <field name='selling_val'/>
+
+	                    <field name='expired_qty'/>
+	                    <field name='expired_val'/>
+
+
+
+	                    <field name='actual_cons'/>
+	                    <field name='closing_map'/>
+
+	                    <field name='variance_qty'/>
+	                    <field name='variance_val'/>
+	                    
+	                    <field name='sys_closing_qty'/>
+	                    <field name='sys_closing_val'/>
+
+
+	                    <!-- <field name='product_qty'/>
+	                    <field name='price_unit'/>
+	                    <field name='value'/> -->
+	                    <!-- <field name='transaction_types'/> -->
+	            </tree>
+	        </field>
+    	</record>
+
+
+    	<record id="inventory_data_report_search" model="ir.ui.view">
+            <field name="name">data.for.reports.search</field>
+            <field name="model">data.for.reports</field>
+            <field name="arch" type="xml">
+                <search string="Inventorty">
+                    <field name="product_id"/>
+                    <field name="category_id"/>
+                    <field name="product_code"/>
+                    <field name="warehouse_id"/>
+                    <!-- <field name="transaction_types"/> -->
+
+                <group expand="0" string="Group By">
+                    <filter string="Product" name="product_id" domain="" context="{'group_by':'product_id'}"/>
+                    <filter string="Date" name="date" domain="" context="{'group_by':'date'}"/>
+                    <filter string="Product Category" name="category_id" domain="" context="{'group_by':'category_id'}"/>
+                    <filter string="Warehouse" name="warehouse_id" domain="" context="{'group_by':'warehouse_id'}"/>
+                    <!-- <filter string="Transaction Type" name="transaction_types" domain="" context="{'group_by':'transaction_types'}"/> -->
+                </group>
+                
+                </search>
+            </field>
+        </record>
+
+
+		<record id="view_pivot_report_data" model="ir.ui.view">
+			<field name="name">pivot</field>
+			<field name="model">data.for.reports</field>
+			<field name="arch" type="xml">
+				<pivot string="Pivot View">
+				   <field name="product_id" type="row"/>
+				   <field name="value" type="measure"/>
+				</pivot>
+			</field>
+		</record>
+
+   		<record id="action_report_data" model="ir.actions.act_window">
+            <field name="name">Report Data</field>
+            <field name="res_model">data.for.reports</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,pivot</field>
+            <field name="view_id" ref="view_inventory_data_report_tree"/>    
+   		</record>
+
+    	<menuitem 
+    			action="action_report_data" 
+    			id="menu_inventory_base_report"
+    			parent="stock.menu_warehouse_report"
+    	/>
+    </data>
+
+</odoo>

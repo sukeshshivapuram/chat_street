@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="view_pricelist_city" model="ir.ui.view">
+        <field name="name">pricelist.city.form</field>
+        <field name="model">pricelist.city</field>
+        <field name="arch" type="xml">
+            <form string="City" >
+                <sheet>
+                    <group>
+
+                    <field name='name'/>
+                </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record id="view_pricelist_city_tree" model="ir.ui.view">
+        <field name="name">pricelist.city.tree</field>
+        <field name="model">pricelist.city</field>
+        <field name="arch" type="xml">
+            <tree string="City" >
+
+                    <field name='name'/>
+
+            </tree>
+        </field>
+    </record>
+
+
+   <record id="action_pricelist_city_form" model="ir.actions.act_window">
+            <field name="name">City</field>
+            <field name="res_model">pricelist.city</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_id" ref="view_pricelist_city_tree"/>
+            
+        </record>
+
+    <menuitem action="action_pricelist_city_form" id="menu_action_pricelist_city"
+        parent="stock.menu_warehouse_config"/>
+
+
+    <record id="view_stock_warehouse_form_for_vendor_pricelit" model="ir.ui.view">
+        <field name="name">stock.warehouse.form.vendor</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse"/>
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+                <field name="city_id"/>
+            </field>
+        </field>
+    </record>
+
+
+    <record id="product_supplierinfo_brand_form_view_city" model="ir.ui.view">
+        <field name="name">product.supplierinfo.brand.form.view</field>
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
+        <field name="arch" type="xml">
+             <xpath expr="//field[@name='product_tmpl_id']" position="after">
+                <field name="city_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_order_filter_form" model="ir.ui.view">
+        <field name="name">purchase.order.filter.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet/notebook/page/field/tree/field[@name='product_id']" position="attributes">
+                <attribute name="domain">[('id','in',parent.product_ids)]</attribute>
+            </xpath>
+            <xpath expr="/form/sheet/notebook/page/field[@name='order_line']" position="after">
+                <field name="product_ids" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

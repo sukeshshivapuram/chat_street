@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo>
+        <record id="view_quant_form_expiry_management" model="ir.ui.view">
+            <field name="name">stock.quant.inherit.form.inherit</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="product_expiry.view_quant_form_expiry"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='removal_date']" position="after" >
+                    
+                    <field name="life_date"/>
+
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_quant_tree_editable_expiry" model="ir.ui.view">
+            <field name="name">stock.quant.inherit.tree.editable</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree_editable"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='lot_id']" position="after" >
+                    
+                    <field name="warehouse_id"/>
+                    <field name="removal_date"/>
+                    <field name="life_date"/>
+                    
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_quant_pivot_expiry" model="ir.ui.view">
+            <field name="name">stock.quant.inherit.pivot</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_pivot"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='location_id']" position="replace" >
+                    
+                    <field name="removal_date" type="col"/>
+                    <field name="life_date" type="col"/>
+                    
+                </xpath>
+            </field>
+        </record>
+
+</odoo>

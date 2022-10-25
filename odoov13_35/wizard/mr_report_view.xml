@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+   
+    <record id="mr_view_form" model="ir.ui.view">
+        <field name="name">mr.report.form</field>
+        <field name="model">mr.report</field>
+        <field name="arch" type="xml">
+            <form string="Margin Analysis">
+                <group>
+                    <field name="mr_printed" invisible="1"/> 
+                  <group  attrs="{'invisible':[('mr_printed','=',True)]}">
+                      <field name="date_start"/>
+                  </group>
+                  <group attrs="{'invisible':[('mr_printed','=',True)]}">
+                      <field name="date_end"/>
+                  </group>                  
+              </group>
+              <group >
+                        <field name="file_name" invisible="1"/>
+                        <field name="mr_report" readonly="1" filename="file_name"/>
+              </group>
+                <footer>
+                    <button string="Count" type="object" name="generate_report" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel" type="object" class="btn btn-secondary oe_inline"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_for_mr" model="ir.actions.act_window">
+        <field name="name">MR Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mr.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="mr_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+       <menuitem id="menu_margin_analysis_action" 
+        action="action_for_mr"
+        parent="stock.menu_warehouse_report"/>
+       
+</odoo>

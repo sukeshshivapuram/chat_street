@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo>
+	<record id="cf_pack_print" model="ir.ui.view">
+    <field name="name">stock.picking.form.inherit1</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form"/>
+    <field name="arch" type="xml">
+        <form string='Transfer'>
+                <!-- <xpath expr="//button[@name='button_validate']" position="after">  -->
+            <header>
+                       
+                <button name="cf_pack_print_button" type="object" string="Print Pack Slip" class="oe_highlight"/>
+                        
+                          <!--  <field name="state" widget="statusbar" statusbar_visible="draft,planned"/> -->
+            </header>
+                <!-- </xpath> -->
+              
+        </form>
+    </field>
+    </record>
+</odoo>
+

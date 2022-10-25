@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+
+        <record id="indent_from_view" model="ir.ui.view">
+            <field name="name">stock.indent.order.state.form</field>
+            <field name="model">stock.indent.order.state</field>
+            <field name="arch" type="xml">
+                <form string="Confirm Purchase">
+                    <p class="oe_grey">
+                        Only Record's of the state Draft will get Confirmed(Done).
+                        Others will get skipped
+                    </p>
+                    <footer>
+                        <button string="Confirm" name="get_current_id" type="object" default_focus="1" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_indent_confirm"
+            name="Confirm Indent"
+            view_id="indent_from_view"
+            res_model="stock.indent.order.state" binding_model="stock.indent.order"
+            view_mode="form" target="new"/>
+
+        
+
+    </data>
+</odoo>

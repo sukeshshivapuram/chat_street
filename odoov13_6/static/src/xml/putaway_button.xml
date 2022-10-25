@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+	<t t-extend="main_menu">
+        <t t-jquery="div.row" t-operation="prepend">
+        	<div class="col">
+                <button class="button_putaway btn btn-block btn-primary mb-4 mb-sm-0">Put Away</button>
+            </div>
+
+        </t>
+    </t>
+
+    <t t-extend="stock_barcode_lines_template">
+    	<t t-jquery="div.o_barcode_line_title + div" t-operation="after">
+            <t t-if="line.putaway">
+                <div>
+                    
+                   <span><strong>Suggested Bins Location:</strong></span>
+                   
+                    <span id="sugg_id" t-esc="line.suggested_bin_loc"/>
+                
+                </div>
+            </t>
+
+    	</t>
+    </t>
+
+
+
+
+</templates>

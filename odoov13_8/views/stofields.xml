@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo>
+	<data>
+        <record id="sto_tree" model="ir.ui.view">
+            <field name="name">inter.company.transfer.inherit2</field>
+            <field name="model">inter.company.transfer.ept</field>
+            <field name="inherit_id" ref="odoov13_8.inter_company_transfer_ept_form_view"/>
+            <field name="arch" type="xml">
+                             
+                <field name='quantity' position='after'>        
+                    <field name="qty_deliver_dc"/>
+                    <field name="qty_done_dc"/>
+                    
+
+                    
+                </field>                   
+                    
+                
+            </field>
+        </record>
+        <record id="sto_form" model="ir.ui.view">
+            <field name="name">inter.company.transfer.inherit3</field>
+            <field name="model">inter.company.transfer.ept</field>
+            <field name="inherit_id" ref="odoov13_8.inter_company_transfer_ept_form_view"/>
+            <field name="arch" type="xml">
+                             
+                <field name='source_warehouse_id' position='after'>        
+                    <field name="pick_out"/>
+                    <!-- <field name="eff_del_dt"/> -->
+                </field> 
+                <field name='destination_warehouse_id' position='after'>        
+                    <field name="pick_in"/>
+                    <!-- <field name="eff_grn_dt"/> -->
+                </field>                  
+                    
+                
+            </field>
+        </record>
+    </data>
+</odoo>

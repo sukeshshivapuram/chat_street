@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="grrtv_report_view_form" model="ir.ui.view">
+        <field name="name">grrtv.report.wizard.form</field>
+        <field name="model">grrtv.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Select Dates">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_from" autocomplete="off"/>
+                        </group>
+                        <group>
+                            <field name="date_to" autocomplete="off"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <group>
+                        <span>
+                            <button string="Download Report" type="object" class="oe_highlight" name="action_grrtv_report"/>
+                            <button string="Cancel" class="oe_link" special="cancel" />
+                        </span>
+                    </group>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    
+    <record id="grrtv_form_action" model="ir.actions.act_window">
+        <field name="name">Select Dates</field>
+        <field name="res_model">grrtv.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_grrtv_report" name="GRRTV Report"
+              parent="stock.menu_warehouse_report"
+              action="grrtv_form_action"/>
+
+</odoo>

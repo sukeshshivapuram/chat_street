@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+   
+    <record id="openclose_view_form" model="ir.ui.view">
+        <field name="name">openclose.report.form</field>
+        <field name="model">openclose.report</field>
+        <field name="arch" type="xml">
+            <form string="Opening Closing Report">
+              <sheet>
+                 <group >
+                    <group string="Dates">
+                        <field name="openclose_printed" invisible="1"/> 
+                        <field name="date_start" attrs="{'invisible':[('openclose_printed','=',True)]}"/>
+                        <field name="date_end" attrs="{'invisible':[('openclose_printed','=',True)]}"/>
+                        <field name="warehouse_id" attrs="{'invisible':[('openclose_printed','=',True)]}"/>
+                        <!-- <field name="pan_india" attrs="{'invisible':[('openclose_printed','=',True)]}"/>                         -->
+                        <field name="file_name" invisible="1"/>
+                        <field name="openclose_report" readonly="1" filename="file_name"/>                
+                    </group>  
+
+                    </group>
+              </sheet>
+                  
+              <footer>
+                <button string="Count" type="object" name="generate_report" class="oe_highlight"/>
+                <button string="Cancel" special="cancel" type="object" class="btn btn-secondary oe_inline"/>
+              </footer>
+            </form>
+        </field>
+    </record>
+
+
+
+
+
+
+    <record id="action_for_openclose" model="ir.actions.act_window">
+        <field name="name"> Stock Opening/Closing</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">openclose.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="openclose_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+       <menuitem id="menu_openclose_action" 
+        action="action_for_openclose"
+        parent="stock.menu_warehouse_report"/>
+       
+</odoo>

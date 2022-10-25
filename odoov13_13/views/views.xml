@@ -1,0 +1,20 @@
+<odoo>
+
+    <record id="purchase_order_form_cf_purch" model="ir.ui.view">
+        <field name="name">purchase.order.form.cf.purch</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <header position="after">
+                <header>
+                    <field name="cron_close" invisible="True"/>
+                    <button name="reopen" type="object" string="Reopen" attrs="{'invisible':['|',('state','in',['draft','sent','to approve','purchase','done','cancel']),('cron_close','=',False)]}"/>
+                </header>
+            </header>
+            <xpath expr="//form/sheet/notebook/page/field/tree/field[@name='qty_received']" position="replace">
+                <field name="qty_received" string="Received" attrs="{'column_invisible': [('parent.state', 'not in', ('purchase', 'done', 'closed'))], 'readonly': [('qty_received_method', '!=', 'manual')]}" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="vendor_management" inherit_id="website.assets_frontend" name="vendor_side_form">
+        <xpath expr="//link[last()]" position="after">
+            <link rel="stylesheet" type="text/scss" href="/odoov13_16/static/src/scss/portal_style.scss"/>
+        </xpath>
+        <xpath expr="//script[last()]" position="after">
+            <script type="text/javascript" src="/odoov13_16/static/src/js/vendor_actions.js"></script>
+
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="destination_indent_order_form" model="ir.ui.view">
+			<field name="name">stock picking custom</field>
+			<field name="model">stock.picking</field>
+			<field name="inherit_id" ref="stock.view_picking_form"/>
+			<field name="arch" type="xml">
+
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="indent_dates" attrs="{'invisible':[('indent_dates', '=', False)]}"/>
+                </xpath>
+
+            </field>
+		</record>
+	</data>
+</odoo>

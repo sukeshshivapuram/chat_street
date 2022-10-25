@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo> 
+    <record id="approve_delivery_date_user_group" model="res.groups">
+        <field name="name">Can Approve delivery date in pruchase order</field>
+        <!-- <field name="category_id" ref="base.module_category_sales_crm"/> -->
+    </record>   
+
+    <record id="view_picking_form_for_vendor" model="ir.ui.view">
+        <field name="name">stock.picking.form.vendor</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+        	<xpath  expr="//form/sheet/notebook" position="inside">
+        		<page name="payment_info" string="Payment Info" attrs="{'invisible': [('picking_type_name', '!=', 'Receipts')]}">
+        			<group>
+        				<group>
+                            <field name="picking_type_name" invisible="1"/>
+        					<field name="bill_number" attrs="{'required': [('from_po', '=', True)]}"/>
+        					<field name="bill_date"  attrs="{'required': [('from_po', '=', True)]}"/>
+        					<field name="bill_value"  attrs="{'required': [('from_po', '=', True)]}"/>
+        					<field name="payment_status"/>
+        					<field name="payment_date"/>
+        					<field name="payment_reference"/>
+                            <field name="payment_value"/>
+                            <field name="grn_value"/>
+                            <field name="from_po" invisible='1'/>
+        				</group>
+        			</group>
+        		</page>
+        	</xpath>
+        </field>
+    </record>
+    <record id="view_stock_warehouse_form_for_vendor" model="ir.ui.view">
+        <field name="name">stock.warehouse.form.vendor</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse"/>
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+                <field name="contact_person_id"/>
+            </field>
+        </field>
+    </record>
+</odoo>

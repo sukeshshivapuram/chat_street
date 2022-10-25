@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+   
+    <record id="mr_view_form" model="ir.ui.view">
+        <field name="name">grn.report.form</field>
+        <field name="model">grn.report</field>
+        <field name="arch" type="xml">
+            <form string="GRN Report">
+            <sheet>
+               <group >
+                  <group string="Dates">
+                      <field name="grn_printed" invisible="1"/> 
+                      <field name="date_start" attrs="{'invisible':[('grn_printed','=',True)]}"/>
+                      <field name="date_end" attrs="{'invisible':[('grn_printed','=',True)]}"/>
+                  </group>  
+                        <field name="file_name" invisible="1"/>
+                        <field name="grn_report" readonly="1" filename="file_name"/>                
+
+                  </group>
+                  <group>
+                    <field name='grn_type' options="{'no_create': True}" attrs="{'invisible':[('grn_printed','=',True)]}" />
+                    <field name="category_id"  options="{'no_create': True}" attrs="{'invisible':[('grn_printed','=',True)]}" widget="many2many_tags"/>
+                    <!-- <field name="product_ids" options="{'no_create': True}" attrs="{'invisible':[('grn_printed','=',True)]}"/> -->
+                  </group>
+       
+            </sheet>
+            <footer>
+                <button string="Count" type="object" name="generate_report" class="oe_highlight"/>
+                <button string="Cancel" special="cancel" type="object" class="btn btn-secondary oe_inline"/>
+            </footer>
+            </form>
+        </field>
+    </record>
+
+
+
+
+
+
+    <record id="action_for_grn" model="ir.actions.act_window">
+        <field name="name">GRN Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">grn.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="mr_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+       <menuitem id="menu_grn_action" 
+        action="action_for_grn"
+        parent="stock.menu_warehouse_report"/>
+       
+</odoo>

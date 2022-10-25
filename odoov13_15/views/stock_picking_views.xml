@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="destination_stock_value_picking_form" model="ir.ui.view">
+			<field name="name">stock.picking.form</field>
+			<field name="model">stock.picking</field>
+			<field name="inherit_id" ref="stock.view_picking_form"/>
+			<field name="arch" type="xml">
+                <!-- <field name="origin" position="after">
+                 	<field name="z_operator"/>
+                 	<field name="z_workcenter_id"/>
+                 	<field name="z_shift"/>
+                </field> -->
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="requisition_date" attrs="{'invisible':[('requisition_date', '=', False)]}"/>
+                </xpath>
+
+                
+                <xpath expr="//field[@name='move_ids_without_package']" position="before">
+                    <field name="show_dest_stock" invisible="True"/>
+                </xpath>
+                <xpath expr="//field[@name='move_ids_without_package']//field[@name='product_uom']" position="after">
+                    <field name="dest_stock" attrs="{'column_invisible':[('parent.show_dest_stock','=',False)]}"/>
+                </xpath>
+            </field>
+		</record>
+	</data>
+</odoo>

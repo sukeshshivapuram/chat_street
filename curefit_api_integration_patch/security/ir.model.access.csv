@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_aggregated_inventory,access.aggregated.inventory,model_aggregated_inventory,,1,1,1,1
+access_cf_api_agg_log,cf.api.agg.log,model_cf_api_agg_log,,1,1,1,1
+access_cf_api_liq_log,cf.api.liq.log.action,model_cf_api_liq_log,,1,1,1,1

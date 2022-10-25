@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo>
+	<record id="cf_page_format" model="report.paperformat">
+        <field name="name">CF pack slip page format</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">28</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+	<report
+		id="report_pack_slip"
+		string="Pack Slip"
+		model="stock.picking"
+		report_type="qweb-pdf"
+		name="odoov13_10.report_packslip"
+		file="odoov13_10.report_packslip"
+		paperformat="odoov13_10.cf_page_format"/>
+	
+	
+</odoo>

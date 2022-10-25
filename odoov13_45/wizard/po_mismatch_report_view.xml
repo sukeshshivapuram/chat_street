@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+   
+    <record id="to_po_mismatch_view_form" model="ir.ui.view">
+        <field name="name">po.mismatch.report.form</field>
+        <field name="model">po.mismatch</field>
+        <field name="arch" type="xml">
+            <form string="Po-To Mismatch">
+              <sheet>
+                 <group >
+                    <group string="Dates">
+                        <field name="po_printed" invisible="1"/> 
+                        <field name="date_start" attrs="{'invisible':[('po_printed','=',True)]}"/>
+                        <field name="date_end" attrs="{'invisible':[('po_printed','=',True)]}"/>
+                        <field name="file_name" invisible="1"/>
+                        <field name="po_report" readonly="1" filename="file_name"/>                
+                    </group>  
+
+                    </group>
+              </sheet>
+                  
+              <footer>
+                <button string="Count" type="object" name="generate_report" class="oe_highlight"/>
+                <button string="Cancel" special="cancel" type="object" class="btn btn-secondary oe_inline"/>
+              </footer>
+            </form>
+        </field>
+    </record>
+
+
+
+
+
+
+    <record id="action_for_to_po_mismatch" model="ir.actions.act_window">
+        <field name="name">Po-To Mismatch </field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">po.mismatch</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="to_po_mismatch_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+       <menuitem id="menu_to_to_po_mismatch" 
+        action="action_for_to_po_mismatch"
+        parent="stock.menu_warehouse_report"/>
+       
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="ir_cron_purchase_recept_date" model="ir.cron">
+            <field name="name">Purchase Receipt Date</field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="state">code</field>
+            <field name="code">model.check_receipt_date()</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+        </record>
+    </data>
+</odoo>

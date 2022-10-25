@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_curefit_api" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.curefit.api</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <div id="base_geolocalize" position="after">
+                <div class="col-12 col-lg-6 o_setting_box" id="curefit_api">
+                    <div class="o_setting_left_pane">
+                    </div>
+                    <div class="o_setting_right_pane" id="curefit_api_settings">
+                        <div>
+                            <strong>Curefit API Integration Settings</strong>
+                        </div>
+                        <div>
+                            <label for="cf_api_url"/>
+                        </div>
+                        <div>
+                            <field name="cf_api_url"/>
+                        </div>
+                        <div>
+                            <label for="cf_api_key"/>
+                        </div>
+                        <div>
+                            <field name="cf_api_key"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+
+    <record id="cf_api_agg_log_view_tree" model="ir.ui.view">
+        <field name="name">cf.api.agg.log.view.tree</field>
+        <field name="model">cf.api.agg.log</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="create_date" />
+                <field name="product_ref"/>
+                <field name="warehouse_ref"/>
+                <field name="product_id"/>
+                <field name="uom_id" />
+                <field name="quantity"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="model_name_view_tree" model="ir.ui.view">
+        <field name="name">cf.api.liq.log.view.tree</field>
+        <field name="model">cf.api.liq.log</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="create_date" />
+                <field name="transaction_ref"/>
+                <field name="product_ref"/>
+                <field name="product_id"/>
+                <field name="uom_id" />
+                <field name="warehouse_ref"/>
+                <field name="req_qty"/>
+                <field name="pre_liq_qty"/>
+                <field name="act_qty"/>
+                <field name="location_id"/>
+                <field name="picking_id"/>
+                <field name="conf_count"/>
+                <field name="last_conf_time"/>
+                <field name="assign_count"/>
+                <field name="last_assign_time"/>
+                <field name="valid_count"/>
+                <field name="last_valid_time"/>
+                <field name="unres_count"/>
+                <field name="last_unres_time"/>
+                <field name="post_liq_qty"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="cf_api_agg_log_action" model="ir.actions.act_window">
+        <field name="name">Inventory Aggrigation Log</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cf.api.agg.log</field>
+        <field name="view_mode">tree</field>
+    </record>
+    <menuitem id="cf_api_agg_log_menu_act" name="Aggrigation Log" action="cf_api_agg_log_action"/>
+
+    <record id="cf_api_liq_action" model="ir.actions.act_window">
+        <field name="name">Inventory Liquidation Log</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cf.api.liq.log</field>
+        <field name="view_mode">tree</field>
+    </record>
+    <menuitem id="cf_api_liq_log_menu_act" name="Liquidation Log" action="cf_api_liq_action"/>
+
+</odoo>

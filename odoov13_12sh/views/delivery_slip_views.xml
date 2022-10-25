@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo>
+
+    <record model="ir.ui.view" id="product_template_zhsn_code">
+        <field name="name">product.template.form.zhsn_code</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <field name="categ_id" position="after">
+                <field name="z_hsn_code"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_picking_form_delivery">
+        <field name="name">stock.picking.form.delivery</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="z_driver"/>
+                <field name="z_contact"/>
+                <field name="z_vehicle"/>
+                <field name="z_dispatch"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

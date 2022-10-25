@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo>
+    <record id="view_picking_type_form_cft" model="ir.ui.view">
+        <field name="name">stock.picking.type.form.cft</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form"/>
+        <field name="arch" type="xml">
+            <field name="show_operations" position="after">
+                <field name="is_putaway"/>
+                <field name="validate_done_qty"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_picking_form_putaway_bin" model="ir.ui.view">
+        <field name="name">stock.picking.form.putaway.bin</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <button name="action_cancel" position="after">
+                <field name="is_putaway" invisible="True"/>
+                <button name="set_locations" type="object" string="Set Destination Bins" attrs="{'invisible': [('is_putaway', '=', False)]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_location_form_bin" model="ir.ui.view">
+        <field name="name">stock.location.form.bin</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form"/>
+        <field name="arch" type="xml">
+            <field name="return_location" position="after">
+                <field name="is_bin"/>
+                <field name="is_kic"/>
+                <field name="kc_ref" attrs="{'invisible':[('is_kic','=',False)]}"/>
+                <field name="is_staff_location"/>
+                <field name="daily_staff_budget" attrs="{'invisible':[('is_staff_location','=',False)]}"/>
+                <field name="amt_consumed" invisible="True"/>
+            </field>
+        </field>
+    </record>
+</odoo>

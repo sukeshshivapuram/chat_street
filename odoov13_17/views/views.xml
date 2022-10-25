@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_approval_matrix_tree_view" model="ir.ui.view">
+        <field name="name">purchase.approval.matrix.tree.view</field>
+        <field name="model">purchase.approval.matrix</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="product_category_id"/>
+                <field name="value"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="purchase_approval_matrix_form_view" model="ir.ui.view">
+        <field name="name">purchase.approval.matrix.form.view</field>
+        <field name="model">purchase.approval.matrix</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="product_category_id"/>
+                        <field name="value"/>
+                        <field name="user_ids">
+                            <tree>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="purchase_approval_action" model="ir.actions.act_window">
+        <field name="name">PurchaseApproval</field>
+        <field name="res_model">purchase.approval.matrix</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="PurchaseApproval" id="purchase_approval_menu" parent="purchase.menu_purchase_config" action="purchase_approval_action"/>
+</odoo>

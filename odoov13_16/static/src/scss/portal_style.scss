@@ -1,0 +1,81 @@
+/*    Radios Buttons & Check Boxes
+       ========================================================================== */
+
+        .hr_cs_control {
+            position: relative;
+            display: inline-block;
+            margin-right: 30px;
+            padding-left: 30px;
+            cursor: pointer;
+            font-weight: 400;
+            input {
+                position: absolute;
+                z-index: -1;
+                opacity: 0;
+            }
+        }
+
+        .hr_cs_control_indicator {
+            @include o-position-absolute($top: 0, $left: 0);
+            width: 20px;
+            height: 20px;
+            background-color: gray('200');
+            border: 1px solid lighten(gray('600'), 20%);
+            &.hr_cs_control_indicator_white {
+                background-color: #fff;
+            }
+        }
+
+        /* Hover and focus states */
+        .hr_cs_control:hover input ~ .hr_cs_control_indicator {
+            background-color: lighten(gray('600'), 20%);
+            border-color: lighten(gray('600'), 20%);
+            &:after {
+                display: block;
+            }
+        }
+
+        /* Checked state */
+        .hr_cs_control input:checked ~ .hr_cs_control_indicator {
+            background-color:  $o-brand-primary;
+            border-color:  $o-brand-primary;
+            &.hr_cs_control_no {
+                background-color: #E46F78;
+                border-color: #E46F78;
+            }
+        }
+
+        /* Check mark */
+        .hr_cs_control_indicator:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        /* Show check mark */
+        .hr_cs_control input:checked ~ .hr_cs_control_indicator:after {
+            display: block;
+        }
+
+        /* Checkbox tick */
+        .hr_cs_control_checkbox .hr_cs_control_indicator:after {
+            top: 2px;
+            left: 6px;
+            @include size(6px, 12px);
+            transform: rotate(45deg);
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+        }
+
+        /* Radio button inner circle */
+        .hr_cs_control_radio .hr_cs_control_indicator {
+            border-radius: 50%;
+            &:after {
+                top: 5px;
+                left: 5px;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: #fff;
+            }
+        }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+   
+    <record id="gr_mismatch_view_form" model="ir.ui.view">
+        <field name="name">gr.mismatch.report.form</field>
+        <field name="model">gr.mismatch.report</field>
+        <field name="arch" type="xml">
+            <form string="GRN Report">
+              <sheet>
+                 <group >
+                    <group string="Dates">
+                        <field name="gr_printed" invisible="1"/> 
+                        <field name="date_start" attrs="{'invisible':[('gr_printed','=',True)]}"/>
+                        <field name="date_end" attrs="{'invisible':[('gr_printed','=',True)]}"/>
+                        <field name="file_name" invisible="1"/>
+                        <field name="gr_report" readonly="1" filename="file_name"/>                
+                    </group>  
+
+                    </group>
+              </sheet>
+                  
+              <footer>
+                <button string="Count" type="object" name="generate_report" class="oe_highlight"/>
+                <button string="Cancel" special="cancel" type="object" class="btn btn-secondary oe_inline"/>
+              </footer>
+            </form>
+        </field>
+    </record>
+
+
+
+
+
+
+    <record id="action_for_gr_mismatch" model="ir.actions.act_window">
+        <field name="name">To-Gr Mismatch</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">gr.mismatch.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="gr_mismatch_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+       <menuitem id="menu_gr_mismatch_action" 
+        action="action_for_gr_mismatch"
+        parent="stock.menu_warehouse_report"/>
+       
+</odoo>

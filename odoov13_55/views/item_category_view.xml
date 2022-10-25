@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="item_category_view_form" model="ir.ui.view">
+            <field name="name">item.category.form</field>
+            <field name="model">item.category</field>
+            <field name="arch" type="xml">
+                <form string="Product Group Secondary">
+                    <group name="Product Group Secondary">
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="product_category_form_view_inherit" model="ir.ui.view">
+                    <field name="name">product.category.form</field>
+                    <field name="model">product.category</field>
+                    <field name="inherit_id" ref="product.product_category_form_view"/>
+                    <field name="arch" type="xml">
+                       <field name="parent_id" position="before">
+                            <field name="z_description"/>
+                        </field>
+                        <field name="parent_id" position="after">
+                                <field name="z_release"/>
+                        </field>
+                </field>
+         </record>
+
+
+        <record id="view_stock_quant_tree_editable_inherit_ravago" model="ir.ui.view">
+            <field name="name">view.stock.quant.tree.editable.inherit.ravago</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree_editable"/>
+            <field name="arch" type="xml">
+                <field name="inventory_quantity" position="replace">
+                    <field name="inventory_quantity" string="On Hand Quantity" readonly="1"/>
+                </field>
+            </field>
+         </record>
+
+         <record id="view_stock_quant_tree_editable_inherit_inherit_ravago" model="ir.ui.view">
+            <field name="name">view.stock.quant.tree.editable.inherit.inhrit.ravago</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock_account.view_stock_quant_tree_editable_inherit"/>
+            <field name="arch" type="xml">
+               <field name="value" position="replace">
+                    <field name="value" invisible="1"/>
+               </field>
+            </field>
+         </record>
+
+   </data>     
+</odoo>

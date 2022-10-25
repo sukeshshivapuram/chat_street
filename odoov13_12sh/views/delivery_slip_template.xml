@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="external_layout_standard_curefit">
+            <div class="header">
+                <table class="table" style="width:100%;">
+                    <tr>
+                        <td style="text-align:center;padding:2px;padding-bottom:10px;font-size:18px;" >
+                            <strong><span t-field="o.company_id.name"/></strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center;padding:2px;padding-bottom:10px;font-size:18px;" >
+                            <span t-field="o.company_id.partner_id.street"/>, 
+                            <span t-field="o.company_id.partner_id.street2"/>
+                            <span t-field="o.company_id.city"/>
+                            <span  t-field="o.company_id.state_id"/>,
+                            <span  t-field="o.company_id.country_id"/>-
+                            <span t-field="o.company_id.partner_id.zip"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center;padding:2px;font-size:18px;" >
+                            <span>Stock Transfer Note/ Delivery Challan</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="article o_report_layout_standard"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-call="web.address_layout"/>
+                <t t-raw="0"/>
+            </div>
+
+            <div class="footer o_standard_footer ">
+                <table class="table table-sm" style="width:100;">
+                    <tr>
+                        <td colspan="2" style="width:100%;">
+                            <span>--------------------------------------------------------------------------------------------------------------------------------------</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:80%;">
+                            <span>Authorized by</span>
+                        </td>
+                        <td style="width:20%;">
+                            <span>Date</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="width:100%;">
+                            <span>Please notify us immideatly if you are unable to ship as specified</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </template>
+    </data>
+</odoo>

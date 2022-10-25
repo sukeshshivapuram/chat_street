@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+
+        	<field name="company_id" position="after">
+        		<field name="vendor_acceptence" attrs="{'invisible': [('vendor_acceptence','=', False)]}"/>
+        		<field name="accepted_date"  attrs="{'invisible': [('vendor_acceptence','!=', 'accepted')]}"/>
+                <field name="estimated_delivery_date"  attrs="{'invisible': [('vendor_acceptence','!=', 'accepted')]}"/>
+                <field name="rejected_date"  attrs="{'invisible': [('vendor_acceptence','!=', 'rejected')]}"/>
+                <field name="rejected_reason"  attrs="{'invisible': [('vendor_acceptence','!=', 'rejected')]}"/>
+
+                <field name="approve_delivery_date" attrs="{'invisible': [('estimated_delivery_date','=', False)]}" groups="odoov13_16.approve_delivery_date_user_group"/>
+        		<field name="dispatch_status" attrs="{'invisible': [('vendor_acceptence','!=', 'accepted')]}"/>
+        		<field name="dispatch_date" attrs="{'invisible': [('vendor_acceptence','!=', 'accepted')]}"/>
+        	</field>
+
+            <xpath expr="//form//page[@name='purchase_delivery_invoice']//field[@name='date_planned']" position="attributes">
+                 <attribute name="required">True</attribute>
+            </xpath>
+
+
+<!--             <xpath expr="//field[@name='order_line']/tree//field[@name='taxes_id']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath> -->
+        </field>
+    </record>
+</odoo>
