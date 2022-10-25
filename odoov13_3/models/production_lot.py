@@ -18,7 +18,7 @@ class StockProductionLot(models.Model):
             if self.product_id.use_time:
                 self.use_date = self.manufacture_date + timedelta(days=self.product_id.use_time)
             if self.product_id.life_time:
-                self.life_date = self.manufacture_date + timedelta(days=self.product_id.life_time)
+                self.expiration_date = self.manufacture_date + timedelta(days=self.product_id.life_time)
             if self.product_id.removal_time:
                 self.removal_date = self.manufacture_date + timedelta(days=self.product_id.removal_time)
             if self.product_id.alert_time:
@@ -34,7 +34,7 @@ class StockProductionLot(models.Model):
             raise ValidationError(_('Use Date Must Be After Removal Date'))
         if self.use_date and self.life_date and not self.use_date < self.life_date:
             raise ValidationError(_('Life Date Must Be After Removal Date'))
-        if self.life_date and self.life_date <= datetime.datetime.now():
+        if self.expiration_date and self.life_date <= datetime.datetime.now():
             raise ValidationError(_('Product Has Passed Expiration Date'))
         if not self.manufacture_date:
             self.use_date = self.removal_date = self.alert_date = self.life_date = False
