@@ -24,7 +24,7 @@ class StockProductionLot(models.Model):
             if self.product_id.alert_time:
                 self.alert_date = self.manufacture_date + timedelta(days=self.product_id.alert_time)
 
-    @api.onchange('use_date','life_date','removal_date','alert_date')
+    @api.onchange('use_date','expiration_date','removal_date','alert_date')
     def _validate_dates(self):
         if self.manufacture_date and self.alert_date and not self.manufacture_date < self.alert_date:
             raise ValidationError(_('Alert Date Must Be After Manufacture Date'))
@@ -32,9 +32,9 @@ class StockProductionLot(models.Model):
             raise ValidationError(_('Removal Date Must Be After Alert Date'))
         if self.removal_date and self.use_date and not self.removal_date < self.use_date:
             raise ValidationError(_('Use Date Must Be After Removal Date'))
-        if self.use_date and self.life_date and not self.use_date < self.life_date:
+        if self.use_date and self.expiration_date and not self.use_date < self.expiration_date:
             raise ValidationError(_('Life Date Must Be After Removal Date'))
-        if self.expiration_date and self.life_date <= datetime.datetime.now():
+        if self.expiration_date and self.expiration_date <= datetime.datetime.now():
             raise ValidationError(_('Product Has Passed Expiration Date'))
         if not self.manufacture_date:
-            self.use_date = self.removal_date = self.alert_date = self.life_date = False
+            self.use_date = self.removal_date = self.alert_date = self.expiration_date = False
