@@ -7,7 +7,7 @@
 		    <field name="arch" type="xml">
 		        <form string="Material Requisition Views" delete="false">
 		        	<header>
-		        		<button name="button_indent_confirm" type="object" class="btn-primary" string="Confirm Material Requisition" attrs="{'invisible': [('state','not in',('draft'))]}"/>
+<!--		        		<button name="button_indent_confirm" type="object" class="btn-primary" string="Confirm Material Requisition" attrs="{'invisible': [('state','not in',('draft'))]}"/>-->
 		        		<button name="button_indent_confirm_approve" type="object" class="btn-primary" string="Approve Material Requisition" attrs="{'invisible': [('state','not in',('waiting_approval'))]}"/>
 		        		<button name="button_indent_transfer" string="Ready To Transfer" type="object"	class="oe_highlight" groups="stock.group_stock_manager" attrs="{'invisible': [('state','not in',('inprogress'))]}" invisible="1"/>
 		        		<button name="indent_transfer_move_confirm_new" string="Confirm Transfer" type="object" clsass="oe_highlight" groups="stock.group_stock_manager" attrs="{'invisible': [('state','not in',('inprogress'))]}"/>
