@@ -9,7 +9,7 @@
     'description': """
 This module generates xlsx reports for COGS	
 """,
-    'depends': ['stock','odoov13_47sh','report_view'],
+    'depends': ['stock', 'odoov13_47sh', 'report_view'],
 
     'data': [
         'wizard/cogs_cockpit_view.xml',
