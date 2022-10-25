@@ -8,7 +8,7 @@
             <field name="ref" position="after">
                 <field name="manufacture_date"/>
                 <field name="use_date"/>
-                <field name="life_date"/>
+                <field name="expiration_date"/>
                 <field name="removal_date"/>
                 <field name="alert_date"/>
             </field>
